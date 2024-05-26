@@ -1,0 +1,58 @@
+#include<stdio.h> void main()
+{
+int i,j,n,bt[30],at[30],st[30],ft[30],wat[30],wt[30],temp,temp1,tot,tt[30]; float awt, att;
+int p[15];
+wat[1]=0;
+printf("ENTER THE NO.OF PROCESS");
+scanf("%d",&n);
+printf("\nENTER THE PROCESS NUMBER,BURST TIME AND ARRIVAL TIME");
+for(i=1;i<=n;i++)
+{
+scanf("%d\t %d\t %d",&p[i],&bt[i],&at[i]);
+}
+printf("\nPROCESS\tBURSTTIME\tARRIVALTIME");
+for(i=1;i<=n;i++)
+{
+printf("\np%d\t%d\t\t%d",p[i],bt[i],at[i]);
+}
+for(i=1;i<=n;i++)
+{
+for(j=i+1;j<=n;j++)
+{
+if(bt[i]>bt[j])
+{
+temp=bt[i]; bt[i]=bt[j]; bt[j]=temp; temp1=p[i]; p[i]=p[j]; p[j]=temp1;
+}
+}
+if(i==1)
+{
+ 
+}
+else
+{st[1]=0;
+ft[1]=bt[1]; wt[1]=0;
+st[i]=ft[i-1];
+ft[i]=st[i]+bt[i];
+wt[i]=st[i];
+}
+}
+printf("\n\n\t\t\tGANTT CHART\n"); printf("\n	\n");
+for(i=1;i<=n;i++)
+printf("|\tp%d\t",p[i]); printf("|\t\n");
+printf("\n	\n");
+printf("\n"); for(i=1;i<=n;i++)
+printf("%d \t\t",wt[i]);
+printf("%d",wt[n]+bt[n]); printf("\n	\n"); for(i=2;i<=n;i++)
+wat[i]=wt[i]-at[i]; for(i=1;i<=n;i++)
+tt[i]=wat[i]+bt[i]-at[i]; printf("\nPROCESS\tBURSTTIME\tARRIVALTIME\tWAITINGTIME\tT URNAROUNDTI ME\n");
+for(i=1;i<=n;i++)
+{
+printf("\np%d %5d %15d %15d %15d",p[i],bt[i],at[i],wat[i],tt[i]);
+}
+for(i=1,tot=0;i<=n;i++) tot+=wt[i];
+awt=(float)tot/n;
+printf("\n\n\n AVERAGE WAITING TIME=%f",awt); for(i=1,tot=0;i<=n;i++)
+tot+=tt[i]; att=(float)tot/n;
+printf("\n\n AVERAGE TURNAROUND TIME=%f",att);
+}
+
